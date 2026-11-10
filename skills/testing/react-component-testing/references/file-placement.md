@@ -67,9 +67,3 @@ some-feature/_components/
 ## Exceptions
 
 - **Cross-component integration tests** that cover a whole page or flow live in the `__tests__` folder of the page or route that owns the flow, named after that page.
-
-## Recap
-
-- `__tests__` next to the component, file named after the component.
-- One `__tests__` per component folder, all the way down the sub-component tree.
-- Move the component, move its `__tests__` folder with it.

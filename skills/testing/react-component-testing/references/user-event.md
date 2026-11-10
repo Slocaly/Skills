@@ -56,8 +56,3 @@ it("submits the form", async () => {
 
 - **Events with no `userEvent` equivalent** (`scroll`, `resize`, a custom DOM event, a `drop` payload that `userEvent` cannot build): `fireEvent` is the right tool.
 - **Fake timers** require `userEvent.setup({ advanceTimers })` rather than a bare `setup()`.
-
-## Recap
-
-- `const user = userEvent.setup()` first, then `await user.click(...)`.
-- Reach for `fireEvent` only when `userEvent` has no equivalent.

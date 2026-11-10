@@ -71,9 +71,3 @@ export const inboundInvoiceQueryOptions = ({ invoiceId, organizationId, ...optio
 ## Exceptions
 
 - None.
-
-## Recap
-
-- Keys = endpoint paths, built from a factory, `organizationId` first.
-- Sub-resources inherit from their parent key via spread.
-- Never inline a raw array.

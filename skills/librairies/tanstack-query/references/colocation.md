@@ -43,8 +43,3 @@ inbound-invoices/[id]/_hooks/queries/
 ## Exceptions
 
 - A query consumed by two or more features **MAY** be promoted to a shared `_hooks/queries/` folder at the nearest common ancestor.
-
-## Recap
-
-- Hook + factory together, in `_hooks/queries/`, near the screen.
-- Share only after the second consumer appears.

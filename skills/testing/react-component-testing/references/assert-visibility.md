@@ -40,8 +40,3 @@ expect(screen.queryByRole("button", { name: "Supprimer la facture" })).not.toBeI
 
 - **Deliberately hidden but present elements** (a visually hidden live region, an `aria-hidden` decoration) are asserted with `.toBeInTheDocument()`, since visibility is not the point.
 - **Elements rendered outside the visible flow** whose styling happy-dom does not compute may need `.toBeInTheDocument()`; note why in the test.
-
-## Recap
-
-- Shown → `getBy*` + `.toBeVisible()`. Gone → `queryBy*` + `.not.toBeInTheDocument()`.
-- `.toBeInTheDocument()` on a visible element hides bugs in collapsed and unopened UI.

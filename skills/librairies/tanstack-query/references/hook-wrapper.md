@@ -60,9 +60,3 @@ export const useInboundInvoiceQuery = (invoiceId: string) => {
 ## Exceptions
 
 - **`useQueries` over a dynamic list**: the factory **MAY** be mapped inline, since the number of queries isn't known statically. The factory itself is still required.
-
-## Recap
-
-- No `useQuery` in a component body, ever.
-- The hook reads context; the factory owns the key and the fetcher.
-- Reach for the suspense variant first.

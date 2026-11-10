@@ -43,8 +43,3 @@ expect(screen.getByText("Facture enregistrée")).toBeVisible();
 
 - **Callback props** exposed by the component under test are part of its public contract: asserting `onChange` was called with the right payload is behavior, not implementation.
 - **Analytics and tracking calls** have no visible output; assert the emitted event directly.
-
-## Recap
-
-- Assert what the user perceives, not how the component gets there.
-- A good component test survives a full rewrite of the component's internals.

@@ -43,8 +43,3 @@ expect(screen.getByLabelText("Montant TTC")).toHaveValue("1 200,00 €");
 
 - **An existing `data-testid` already in the markup** may be used rather than adding new markup, but do not add more.
 - **Third-party components with no accessible handle** may require a test id; wrap them once and comment why.
-
-## Recap
-
-- Role, then label, then text. Test id only when nothing else exists.
-- If no accessible query works, the component has an accessibility bug, not a testing problem.

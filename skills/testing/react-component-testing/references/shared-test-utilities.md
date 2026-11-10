@@ -80,8 +80,3 @@ render(
 ## Exceptions
 
 - **A need with no existing utility**: add the helper to `src/test` so the next test reuses it, rather than keeping it local to one file.
-
-## Recap
-
-- Look in `src/test` first; add helpers there when something is missing.
-- Override globals with `mockCan` / `mockFeatureFlags`; never re-mock them.

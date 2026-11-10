@@ -79,8 +79,3 @@ vi.mock("src/services/inbound-invoices/get-inbound-invoice.services", () => ({
 ## Exceptions
 
 - **`vi.doMock`** is not hoisted and exists precisely to swap a module per test. It **MAY** be called inside a test, and **MUST** be paired with `vi.resetModules()` and a dynamic `import()` of the module under test.
-
-## Recap
-
-- Declarations at the top, values in `beforeEach` or the test.
-- A `vi.mock` inside a `describe` applies to the whole file anyway. Vitest hoists it.

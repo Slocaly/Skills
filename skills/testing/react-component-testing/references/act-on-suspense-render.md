@@ -53,8 +53,3 @@ it("shows data", async () => {
 
 - **Non-suspense queries** (`use<Entity>Query`) expose loading state instead of suspending: assert the loading UI, then use `findBy*` for the loaded UI. No `act` needed.
 - **Asserting the fallback itself** is a valid reason to render without `act`, since you want to observe the suspended state.
-
-## Recap
-
-- Suspense in the tree means `await act(() => render(...))`.
-- An `act` warning in a test output is this rule telling you it was skipped.

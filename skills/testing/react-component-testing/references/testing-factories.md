@@ -50,8 +50,3 @@ vi.mocked(getOrganization).mockResolvedValue({
 ## Exceptions
 
 - **Small local shapes** that are not domain entities (a props object, a two-field API payload used in one test) do not need a factory.
-
-## Recap
-
-- `createTesting<Entity>` from `src/test`, override only what matters.
-- Missing factory? Create `create-testing-<entity>.ts` instead of an inline literal.

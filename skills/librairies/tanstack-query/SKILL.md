@@ -27,6 +27,10 @@ _hooks/queries/use<X>Query.ts     # React hook: reads context, spreads the facto
 
 Read the rules relevant to the task before writing or changing query code; each file has a TL;DR, the rationale, MUST/MUST NOT rules, ❌/✅ examples and exceptions. When creating a new query from scratch, read at least: options-factory, keys-hierarchy, hook-wrapper, hook-naming.
 
+## Read together
+
+Creating a query from scratch: `options-factory` → `keys-hierarchy` → `hook-wrapper` → `hook-naming` (they build on each other). Changing the cache after a mutation: `keys-hierarchy` + `invalidation-prefix`.
+
 ## Rules
 
 - [Colocate query hooks with their consumer](references/colocation.md) — Query hooks and their `queryOptions` factories live together in the `_hooks/queries` folder closest to where they are consumed; promote to a shared location only when a second feature needs the query.

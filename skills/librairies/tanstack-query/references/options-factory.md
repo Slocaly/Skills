@@ -95,9 +95,3 @@ await queryClient.prefetchQuery(
 ## Exceptions
 
 - None.
-
-## Recap
-
-- One factory file per query, separate from the hook.
-- Pure function with explicit args: no hooks, no context, `organizationId` passed in.
-- Keys come from the key factory, never inline.

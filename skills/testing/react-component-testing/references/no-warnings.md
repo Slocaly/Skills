@@ -42,8 +42,3 @@ const renderMyComponent = async () => {
 ## Exceptions
 
 - **A warning emitted on purpose by the code under test** (a deprecation notice you are asserting on) may be asserted with a spy, provided the assertion is the point of the test.
-
-## Recap
-
-- Clean output is part of the definition of done for a test.
-- Fix the cause; muting the console removes the signal, not the bug.

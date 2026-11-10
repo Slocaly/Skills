@@ -57,8 +57,3 @@ it("hides the delete action when the user lacks permission", () => {
 
 - **Presentational components with an accessibility contract** (a custom `role`, an `aria-*` wiring, a focus behavior) count as logic: test them.
 - **Design-system primitives** published for reuse may be tested even without branching, because their API is a contract for other teams.
-
-## Recap
-
-- Logic in, test in. No logic, no test.
-- If the test would break only on a restyle, it is testing the wrong thing.

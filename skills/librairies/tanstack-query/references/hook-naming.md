@@ -48,8 +48,3 @@ export const useListSuppliersQuery = () => { ... };
 ## Exceptions
 
 - None.
-
-## Recap
-
-- Single → `use<Entity>Query`. Collection → `useList<Entities>Query`.
-- File name = hook name minus `Suspense`.

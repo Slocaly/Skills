@@ -54,9 +54,3 @@ queryClient.invalidateQueries({ queryKey: [organizationId] });
 ## Exceptions
 
 - None.
-
-## Recap
-
-- Invalidate via the key factory, at the broadest matching prefix.
-- `details(...)` invalidation cascades to `comments(...)`.
-- `exact: true` when you only want the list.

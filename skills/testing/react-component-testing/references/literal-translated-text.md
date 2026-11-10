@@ -38,8 +38,3 @@ expect(screen.getByRole("button", { name: "Supprimer la facture" })).toBeVisible
 
 - **Tests of the i18n plumbing itself** (a `Trans` wrapper, an interpolation helper) legitimately reference keys, because the key handling is the behavior under test.
 - **Interpolated copy** may be asserted with a regular expression when a dynamic value sits inside the sentence.
-
-## Recap
-
-- Assert the sentence the user reads, not the key that produced it.
-- A `t()` call inside an expectation is an assertion comparing a value to itself.

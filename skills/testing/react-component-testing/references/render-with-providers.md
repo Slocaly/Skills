@@ -58,8 +58,3 @@ const renderSelectRegionalBankForm = (formValues?: Partial<FormValues>) =>
 
 - **Testing `render-with-providers` itself**, or a provider in isolation, may use the Testing Library `render` directly.
 - **`within(element)`** is the intended way to scope queries to a subtree; that is not the same as destructuring the render result.
-
-## Recap
-
-- `render` from `src/test/render-with-providers`, `screen` from `@testing-library/react`.
-- Repeated setup becomes a `render<Component>` helper, not copy-paste.

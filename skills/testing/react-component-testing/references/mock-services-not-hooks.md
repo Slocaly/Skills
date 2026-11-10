@@ -99,8 +99,3 @@ describe("InboundInvoiceHeader", () => {
 
 - **A child that cannot run in the test environment** (a canvas renderer, a PDF viewer, a map SDK) may be mocked; say why in a comment.
 - **A hook with no service behind it** (a browser API wrapper, a timer-based hook) is mocked directly, since there is no lower boundary to cut at.
-
-## Recap
-
-- Cut at the service, keep the query layer and the child tree real.
-- A `vi.mock` on a `use…Query` hook or a child component needs a written justification.

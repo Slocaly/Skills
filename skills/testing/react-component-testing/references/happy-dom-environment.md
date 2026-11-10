@@ -51,8 +51,3 @@ it("shows the invoice label", () => {
 
 - **A DOM API happy-dom does not implement** (some layout, range, or canvas APIs): add the pragma and name the API in a comment.
 - **A third-party library that only works under jsdom**: same, with the library named.
-
-## Recap
-
-- happy-dom by default, jsdom by exception with a stated reason.
-- Adding the pragma to a whole folder is a red flag, not a fix.

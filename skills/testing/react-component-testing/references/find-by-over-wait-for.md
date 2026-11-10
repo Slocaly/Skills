@@ -39,8 +39,3 @@ expect(await screen.findByRole("option", { name: "Alsace Vosges" })).toBeVisible
 
 - **Waiting on something other than an element**: a mock called, a URL changed, an element removed (`waitForElementToBeRemoved`). `waitFor` is correct there.
 - **Waiting for an element to reach a state** it did not have on appearance (a button becoming enabled) is a legitimate `waitFor` on an already-found element.
-
-## Recap
-
-- `await screen.findBy*` for anything that appears later.
-- `waitFor` is for conditions that are not an element appearing.
