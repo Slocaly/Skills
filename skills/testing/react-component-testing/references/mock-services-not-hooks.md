@@ -49,7 +49,7 @@ beforeEach(() => {
 **✅ Do this: full test file shape**
 
 ```tsx
-import { act, screen } from "@testing-library/react";
+import { screen, waitForElementToBeRemoved } from "@testing-library/react";
 import { NuqsTestingAdapter } from "nuqs/adapters/testing";
 import { createTestingImportedInboundInvoice } from "src/test/createTestingInboundInvoice";
 import { mockCan } from "src/test/mock-can";
@@ -67,28 +67,26 @@ vi.mock("src/services/inbound-invoices/get-inbound-invoice.services", async () =
   };
 });
 
-const renderInboundInvoiceHeader = async () => {
-  await act(() =>
-    render(
-      <NuqsTestingAdapter>
-        <InboundInvoiceHeader />
-      </NuqsTestingAdapter>,
-    ),
+const renderInboundInvoiceHeader = () =>
+  render(
+    <NuqsTestingAdapter>
+      <InboundInvoiceHeader />
+    </NuqsTestingAdapter>,
   );
-};
 
 describe("InboundInvoiceHeader", () => {
   it("shows the delete action", async () => {
     mockInboundInvoiceFeatureFlag();
-    await renderInboundInvoiceHeader();
+    renderInboundInvoiceHeader();
 
-    expect(screen.getByRole("button", { name: "Supprimer la facture" })).toBeVisible();
+    expect(await screen.findByRole("button", { name: "Supprimer la facture" })).toBeVisible();
   });
 
   it("hides the delete action when the user lacks permission", async () => {
     mockCan({ deleteInboundInvoice: { isAllowed: false, reason: "role" } });
     mockInboundInvoiceFeatureFlag();
-    await renderInboundInvoiceHeader();
+    renderInboundInvoiceHeader();
+    await waitForElementToBeRemoved(() => screen.queryByText("suspense boundary..."));
 
     expect(screen.queryByRole("button", { name: "Supprimer la facture" })).not.toBeInTheDocument();
   });

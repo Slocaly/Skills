@@ -6,6 +6,7 @@
 
 - A new or modified test **MUST** produce no warning in the output.
 - Fix the cause: `act` warnings, missing keys, unhandled rejections, deprecated APIs.
+- An `act` warning is fixed by awaiting the update, not by adding `act`.
 - Silencing the console instead of fixing the cause does not count.
 
 ## Why
@@ -17,6 +18,7 @@ Warnings are the suite telling you the test does not reflect how the component b
 - A new or modified test **MUST NOT** emit warnings when the suite runs.
 - Every warning **MUST** be fixed at its cause: React `act` warnings, missing `key` props, unhandled promise rejections, deprecated API usage.
 - Warnings **MUST NOT** be hidden by stubbing `console.warn` or `console.error`.
+- An `act` warning **MUST NOT** be hidden by wrapping Testing Library calls in `act`.
 - A test emitting warnings **MUST NOT** be merged.
 
 ## Example
@@ -34,10 +36,14 @@ The `act` warning is gone and so is every future signal from this file.
 **✅ Do this: fix the cause**
 
 ```tsx
-const renderMyComponent = async () => {
-  await act(() => render(<MyComponent />));
-};
+it("shows the prefilled company", async () => {
+  render(<MyComponent />);
+
+  expect(await screen.findByRole("textbox", { name: "Raison sociale" })).toHaveValue("Kolecto");
+});
 ```
+
+The `act` warning came from an update landing after the test ended: awaiting the element the test asserts on waits for it. Wrapping the render in `act` hides it instead (see [no-manual-act](no-manual-act.md)).
 
 ## Exceptions
 

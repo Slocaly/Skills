@@ -7,6 +7,7 @@
 - Asynchronous element → `expect(await screen.findByRole(...)).toBeVisible()`.
 - Do not wrap `getBy*` in `waitFor`: `findBy*` already retries until it appears or times out.
 - Keep `waitFor` for conditions that are not "an element showed up".
+- Async work on mount with nothing new on screen (a validation, a prefill)? Still `await findBy*` on the element you assert on.
 
 ## Why
 
@@ -18,6 +19,8 @@
 - `waitFor` **MUST NOT** wrap a `getBy*` query whose only purpose is waiting for the element to appear.
 - A `waitFor` callback **MUST NOT** contain side effects, only assertions.
 - Asserting that something never appears **MUST** use `queryBy*` after the awaited state change, not a timeout.
+- When the component runs async work on mount that renders no new element (a form `trigger()`, a prefill from storage), the test's first assertion **MUST** be an `await findBy*` on the element it checks, even if that element is already on screen.
+- When that async work does change something visible (an error message, an enabled button), the test **SHOULD** await that change instead.
 
 ## Example
 
@@ -34,6 +37,26 @@ await waitFor(() => {
 ```tsx
 expect(await screen.findByRole("option", { name: "Alsace Vosges" })).toBeVisible();
 ```
+
+**❌ Avoid: synchronous assertion while a validation runs on mount**
+
+```tsx
+render(<InvitationForm />);
+
+expect(screen.getByText("Certaines informations ont été préremplies")).toBeVisible();
+```
+
+The form calls `trigger()` in an effect; the validation resolves after the test ends and React logs an `act` warning.
+
+**✅ Do this: findBy on the asserted element**
+
+```tsx
+render(<InvitationForm />);
+
+expect(await screen.findByText("Certaines informations ont été préremplies")).toBeVisible();
+```
+
+`findBy*` resolves on the first match, but it runs inside `act` and lets pending work settle before returning, which flushes the validation.
 
 ## Exceptions
 

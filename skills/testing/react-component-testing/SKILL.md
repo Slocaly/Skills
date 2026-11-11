@@ -12,7 +12,7 @@ How I test React components: behavior over implementation, real data layer cut a
 1. **Assert what the user sees and can do**, never internals (hooks called, state, component tree).
 2. **Mock at the service boundary** (the function a `queryFn`/`mutationFn` calls), never query hooks, child components or child hooks.
 3. **Query like a user**: role, then label, then text. `getByTestId` is never introduced.
-4. **Interact with `user-event`**, await async UI with `findBy*` (not `waitFor`), wrap suspense renders in `act`.
+4. **Interact with `user-event`**, await async UI with `findBy*` (not `waitFor`), never wrap Testing Library calls in `act`.
 5. **A test ships with clean output**: no warnings, no `act` noise.
 
 ## Read by task
@@ -36,17 +36,18 @@ Each reference has a TL;DR, the rationale, MUST/MUST NOT rules, ❌/✅ examples
 - [Use the shared test utilities](references/shared-test-utilities.md) — Permissions, feature flags, form context, and search params are controlled through the helpers in `src/test`, never by re-mocking what `setup.ts` already mocks.
 
 ### Interactions and async UI
-These three form one cluster: async warnings usually come from skipping one of them.
+These rules form one cluster: an `act` warning is fixed by awaiting the update, never by adding `act`.
 - [Interact with user-event](references/user-event.md) — User interactions go through `@testing-library/user-event`, with `userEvent.setup()` called at the start of every test that interacts.
 - [Await findBy instead of waitFor](references/find-by-over-wait-for.md) — An element that appears asynchronously is awaited with `findBy*`, not polled with `waitFor` around a `getBy*`.
-- [Wrap suspense renders in act](references/act-on-suspense-render.md) — When the rendered tree uses a suspense query, `await act(() => render(...))` so the suspended update flushes before the assertions.
+- [Await the loaded UI after a suspense render](references/await-suspense-render.md) — When the rendered tree uses a suspense query, the first assertion awaits the loaded UI (`findBy*`, or `waitForElementToBeRemoved` before an absence check).
+- [Do not wrap Testing Library calls in act](references/no-manual-act.md) — Testing Library already wraps its utilities in `act`; an `act` warning is fixed by awaiting what the user would wait for. Manual `act` only for hook calls, fake timers and external stores.
 
 ### Assertions
 - [Assert visibility, not presence](references/assert-visibility.md) — Presence uses `getBy*` with `.toBeVisible()`; absence uses `queryBy*` with `.not.toBeInTheDocument()`.
 - [Query the rendered string, not the i18n key](references/literal-translated-text.md) — Text queries and assertions use the literal string the user reads, never `t('namespace:key')`.
 
 ### Before shipping / debugging warnings
-- [Ship tests with a clean output](references/no-warnings.md) — A test that emits a warning is not finished: fix the cause before it ships (often a missing `act`, `findBy*` or `userEvent.setup()`).
+- [Ship tests with a clean output](references/no-warnings.md) — A test that emits a warning is not finished: fix the cause before it ships (often a missing `findBy*`, `waitForElementToBeRemoved` or `userEvent.setup()`).
 
 ## Project-specific conventions
 
