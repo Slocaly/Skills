@@ -13,7 +13,8 @@ How I test React components: behavior over implementation, real data layer cut a
 2. **Mock at the service boundary** (the function a `queryFn`/`mutationFn` calls), never query hooks, child components or child hooks.
 3. **Query like a user**: role, then label, then text. `getByTestId` is never introduced.
 4. **Interact with `user-event`**, await async UI with `findBy*` (not `waitFor`), never wrap Testing Library calls in `act`.
-5. **A test ships with clean output**: no warnings, no `act` noise.
+5. **Never snapshot-test a component**: write explicit assertions instead.
+6. **A test ships with clean output**: no warnings, no `act` noise.
 
 ## Read by task
 
@@ -43,6 +44,7 @@ These rules form one cluster: an `act` warning is fixed by awaiting the update, 
 - [Do not wrap Testing Library calls in act](references/no-manual-act.md) — Testing Library already wraps its utilities in `act`; an `act` warning is fixed by awaiting what the user would wait for. Manual `act` only for hook calls, fake timers and external stores.
 
 ### Assertions
+- [Never use snapshot testing](references/no-snapshot-testing.md) — Component tests assert explicit user-visible expectations; `toMatchSnapshot` and inline snapshots are never used on rendered output.
 - [Assert visibility, not presence](references/assert-visibility.md) — Presence uses `getBy*` with `.toBeVisible()`; absence uses `queryBy*` with `.not.toBeInTheDocument()`.
 - [Query the rendered string, not the i18n key](references/literal-translated-text.md) — Text queries and assertions use the literal string the user reads, never `t('namespace:key')`.
 
